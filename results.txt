@@ -1,0 +1,3 @@
+Sender: security@paypa1.com | Domain: paypa1.com | status: Phishing
+Sender: john@gmail.com | Domain: gmail.com | status: Legitimate
+Sender: support@bank-secure-login.com | Domain: bank-secure-login.com | status: Phishing

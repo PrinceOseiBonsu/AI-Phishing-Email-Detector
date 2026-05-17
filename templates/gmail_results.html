@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Scan Results</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a0a; color: #ffffff; min-height: 100vh; padding: 40px 0; }
+        .container { max-width: 800px; width: 90%; margin: 0 auto; }
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #00ff88; }
+        p.subtitle { color: #666; font-size: 14px; margin-bottom: 40px; }
+        .email-card { background: #111; border: 1px solid #1a1a1a; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .email-card.phishing { border-color: #ff4444; }
+        .email-card.legitimate { border-color: #00ff88; }
+        .email-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .email-subject { font-size: 15px; font-weight: 600; color: #fff; }
+        .email-sender { font-size: 12px; color: #666; margin-top: 4px; }
+        .badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+        .badge-phishing { background: rgba(255,68,68,0.1); color: #ff4444; border: 1px solid #ff4444; }
+        .badge-legitimate { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid #00ff88; }
+        .email-meta { display: flex; gap: 16px; margin-bottom: 12px; }
+        .meta-item { font-size: 12px; color: #666; }
+        .meta-value { font-weight: 600; }
+        .critical { color: #ff4444; }
+        .high { color: #ff8800; }
+        .medium { color: #ffcc00; }
+        .low { color: #00ff88; }
+        .keyword { display: inline-block; background: rgba(255,68,68,0.1); color: #ff4444; border: 1px solid rgba(255,68,68,0.3); border-radius: 4px; padding: 2px 6px; font-size: 11px; margin: 2px; }
+        .ai-box { background: #0d0d0d; border-radius: 8px; padding: 12px; margin-top: 12px; border-left: 3px solid #00ff88; }
+        .ai-box p { font-size: 12px; color: #aaa; line-height: 1.6; }
+        .summary { background: #111; border: 1px solid #222; border-radius: 16px; padding: 24px; margin-bottom: 24px; display: flex; gap: 24px; }
+        .summary-item { text-align: center; }
+        .summary-number { font-size: 32px; font-weight: 700; }
+        .summary-label { font-size: 12px; color: #666; margin-top: 4px; }
+        .btn { display: inline-block; text-align: center; background: #00ff88; color: #000; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 700; text-decoration: none; margin-top: 20px; }
+        .btn:hover { background: #00cc70; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📬 Gmail Scan Results</h1>
+        <p class="subtitle">AI powered phishing detection across your inbox</p>
+
+        {% set phishing_count = results|selectattr('result.prediction', 'equalto', 'Phishing')|list|length %}
+        {% set total = results|length %}
+
+        <div class="summary">
+            <div class="summary-item">
+                <div class="summary-number" style="color: #00ff88">{{ total }}</div>
+                <div class="summary-label">Emails Scanned</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number" style="color: #ff4444">{{ phishing_count }}</div>
+                <div class="summary-label">Phishing Detected</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-number" style="color: #00ff88">{{ total - phishing_count }}</div>
+                <div class="summary-label">Legitimate</div>
+            </div>
+        </div>
+
+        {% for item in results %}
+        <div class="email-card {% if item.result.prediction == 'Phishing' %}phishing{% else %}legitimate{% endif %}">
+            <div class="email-header">
+                <div>
+                    <div class="email-subject">{{ item.subject }}</div>
+                    <div class="email-sender">From: {{ item.sender }}</div>
+                </div>
+                <span class="badge {% if item.result.prediction == 'Phishing' %}badge-phishing{% else %}badge-legitimate{% endif %}">
+                    {% if item.result.prediction == 'Phishing' %}⚠️ PHISHING{% else %}✅ SAFE{% endif %}
+                </span>
+            </div>
+
+            <div class="email-meta">
+                <div class="meta-item">
+                    Confidence: <span class="meta-value">{{ item.result.confidence }}%</span>
+                </div>
+                <div class="meta-item">
+                    Risk: <span class="meta-value {% if item.result.risk_level == 'CRITICAL' %}critical{% elif item.result.risk_level == 'HIGH' %}high{% elif item.result.risk_level == 'MEDIUM' %}medium{% else %}low{% endif %}">
+                        {{ item.result.risk_level }}
+                    </span>
+                </div>
+                {% if item.result.keywords %}
+                <div class="meta-item">
+                    {% for keyword in item.result.keywords %}
+                        <span class="keyword">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="ai-box">
+                <p>🤖 {{ item.explanation }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <a href="/" class="btn">🔍 Analyze Single Email</a>
+    </div>
+</body>
+</html>

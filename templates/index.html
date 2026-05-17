@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Email Detector</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a0a; color: #ffffff; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 700px; width: 90%; padding: 40px 0; }
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #00ff88; }
+        p.subtitle { color: #666; font-size: 14px; margin-bottom: 40px; }
+        .card { background: #111; border: 1px solid #1a1a1a; border-radius: 16px; padding: 32px; margin-bottom: 20px; }
+        label { display: block; font-size: 13px; color: #666; margin-bottom: 8px; }
+        input, textarea { width: 100%; background: #0d0d0d; border: 1px solid #222; border-radius: 10px; padding: 12px; color: #fff; font-size: 14px; outline: none; transition: border 0.3s; }
+        input:focus, textarea:focus { border-color: #00ff88; }
+        input { margin-bottom: 20px; }
+        textarea { height: 150px; resize: none; }
+        button { width: 100%; background: #00ff88; color: #000; border: none; border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.3s; }
+        button:hover { background: #00cc70; }
+        .badges { text-align: center; margin-top: 24px; }
+        .badge { display: inline-block; background: #111; border: 1px solid #222; border-radius: 20px; padding: 4px 14px; font-size: 12px; color: #666; margin: 4px; }
+        .divider { text-align: center; margin: 24px 0; color: #333; font-size: 13px; }
+        .gmail-btn { display: block; text-align: center; background: #fff; color: #000; border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 700; text-decoration: none; transition: background 0.3s; }
+        .gmail-btn:hover { background: #f0f0f0; }
+        .outlook-btn { display: block; text-align: center; background: #0078d4; color: #fff; border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 700; text-decoration: none; margin-top: 12px; transition: background 0.3s; }
+        .outlook-btn:hover { background: #006cbd; }
+        .powered { text-align: center; margin-top: 30px; font-size: 12px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ AI Phishing Detector</h1>
+        <p class="subtitle">Trained on 29,767 real emails · 98.44% accuracy · Powered by Random Forest + AI</p>
+
+        <div class="card">
+            <form action="/analyze" method="POST">
+                <label>Email Subject</label>
+                <input type="text" name="subject" placeholder="Enter email subject..." required>
+
+                <label>Email Body</label>
+                <textarea name="body" placeholder="Paste the full email body here..." required></textarea>
+
+                <button type="submit">🔍 Analyze Email</button>
+            </form>
+        </div>
+
+        <div class="divider">— or connect your inbox —</div>
+
+        <a href="/gmail" class="gmail-btn">📧 Connect Gmail — Scan Your Inbox</a>
+        <a href="#" class="outlook-btn">📨 Connect Outlook — Coming Soon</a>
+
+        <div class="badges">
+            <span class="badge">✓ 98.44% Accuracy</span>
+            <span class="badge">✓ Real Time Analysis</span>
+            <span class="badge">✓ 10,005 Features</span>
+            <span class="badge">✓ Random Forest AI</span>
+        </div>
+
+        <p class="powered">Built by Prince Osei Bonsu · Voorhees University</p>
+    </div>
+</body>
+</html>

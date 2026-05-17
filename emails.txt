@@ -1,0 +1,3 @@
+security@paypa1.com | URGENT: Your account suspended | True
+john@gmail.com | Hey are we still meeting at 3? | False
+support@bank-secure-login.com | Verify your account now | True

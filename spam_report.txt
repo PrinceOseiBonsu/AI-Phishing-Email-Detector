@@ -1,0 +1,57 @@
+==================================================
+PHISHING DETECTION REPORT
+==================================================
+Sender: security@paypa1.com 
+Subject:  URGENT: Your account has been suspended 
+Domain: paypa1.com 
+Risk: High
+Urgency Score: 3
+Links Found: ['http://paypa1.com/verify']
+Keywords: ['urgent', 'verify', 'suspended', 'click', 'immediately', 'account']
+--------------------------------------------------
+
+Sender: john@gmail.com 
+Subject:  Hey are we still meeting at 3pm? 
+Domain: gmail.com 
+Risk: Low
+Urgency Score: 0
+Links Found: []
+Keywords: []
+--------------------------------------------------
+
+Sender: support@bank-secure-login.com 
+Subject:  Verify your account now 
+Domain: bank-secure-login.com 
+Risk: High
+Urgency Score: 2
+Links Found: ['http://fake-bank.com/login']
+Keywords: ['verify', 'click', 'account', 'login']
+--------------------------------------------------
+
+Sender: newsletter@amazon.com 
+Subject:  Your order has shipped 
+Domain: amazon.com 
+Risk: Low
+Urgency Score: 0
+Links Found: []
+Keywords: []
+--------------------------------------------------
+
+Sender: alert@paypa1-secure.com 
+Subject:  URGENT: Immediate action required 
+Domain: paypa1-secure.com 
+Risk: Critical
+Urgency Score: 4
+Links Found: ['http://scam.com/paypal']
+Keywords: ['urgent', 'verify', 'suspended', 'immediately', 'account']
+--------------------------------------------------
+
+Sender: hr@yourcompany.com 
+Subject:  Team lunch Friday 
+Domain: yourcompany.com 
+Risk: Low
+Urgency Score: 0
+Links Found: []
+Keywords: []
+--------------------------------------------------
+
